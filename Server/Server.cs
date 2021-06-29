@@ -34,6 +34,8 @@ namespace DNS_Simulation
         TcpListener tcpListener;
         Stream stream;
         List<Socket> clientsockets; // danh sách cách client đã kết nối
+
+        //Hàm kết nối với các Client
         void Connect()
         {
 
@@ -64,6 +66,7 @@ namespace DNS_Simulation
             thread.IsBackground = true;
             thread.Start();
         }
+        //Hàm kiểm tra xem tên miền có tồn tại trong datase
         public bool Found(string dnsName)
         {
 
@@ -74,7 +77,7 @@ namespace DNS_Simulation
             {             
                 if (node.Attributes["value"].Value != null)
                 {
-                    string value = node.Attributes["value"].Value; ///NOT-FOUND // CRASHED // NHO FIX NHA NGOC HUYEN
+                    string value = node.Attributes["value"].Value; 
                     return true;
                 }
                 else
@@ -82,12 +85,12 @@ namespace DNS_Simulation
                     return false;
                 }
             }
-            catch
+            catch (NullReferenceException)
             {
                 return false;
             }
         }
-
+        //Hàm trả về tên miền trong database
         public string findIP(string dnsName)
         {
             
@@ -104,7 +107,7 @@ namespace DNS_Simulation
             stream.Write(data, 0, data.Length);
 
         }
-        
+        //Hàm nhận dữ liệu từ client, và gửi lại dữ liệu
         void Receive(Object obj)
         {
             try
@@ -116,11 +119,11 @@ namespace DNS_Simulation
                     client.Receive(rev);
                     string s = Encoding.UTF8.GetString(rev);
                     s = s.Replace("\0", string.Empty);
-                    if (Found(s))
+                    if (Found(s)) //Nếu tìm thấy trả về IP
                     {
                         rev = Encoding.UTF8.GetBytes(findIP(s));                        
                     }
-                    else
+                    else // Không tìm được trả về Not Found
                     {
                         string notFound = "Not Found!";
                         rev = Encoding.UTF8.GetBytes(notFound);
@@ -147,7 +150,8 @@ namespace DNS_Simulation
 
         private void Server_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Close();
+            MessageBox.Show("Ngắt kết nối Server", "Disconnected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //Close();
         }
 
         private void button2_Click(object sender, EventArgs e)

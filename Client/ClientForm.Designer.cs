@@ -72,6 +72,7 @@ namespace Client
             this.tbDNS.Name = "tbDNS";
             this.tbDNS.Size = new System.Drawing.Size(629, 39);
             this.tbDNS.TabIndex = 6;
+            this.tbDNS.TextChanged += new System.EventHandler(this.tbDNS_TextChanged);
             // 
             // button1
             // 

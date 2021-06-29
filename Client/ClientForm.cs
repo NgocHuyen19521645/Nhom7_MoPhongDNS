@@ -50,13 +50,14 @@ namespace Client
                 MessageBox.Show("Nhập lại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
-
+        //Hiện IP lên textbox
         void Addmessage(string mess)
         {
             this.tbResult.Text = mess;
             this.tbResult.Enabled = false;
 
         }
+        //Nhận dữ liệu từ server trả về
         void Receive()
         {
             try
@@ -66,9 +67,11 @@ namespace Client
                     byte[] rev = new byte[1024];
                     stream.Read(rev, 0, rev.Length);
                     string s = Encoding.UTF8.GetString(rev);
-                    if(s == "Not Found!")
+                    s = s.Replace("\0", string.Empty);
+                    if (s == "Not Found!")
                     {
-                        MessageBox.Show("Not Found!", "NOTIFICATION", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        this.tbResult.Clear();
+                        MessageBox.Show("Not Found!", "NOTIFICATION", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                   
                     }
                     else
                     {
@@ -109,6 +112,9 @@ namespace Client
 
         }
 
+        private void tbDNS_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

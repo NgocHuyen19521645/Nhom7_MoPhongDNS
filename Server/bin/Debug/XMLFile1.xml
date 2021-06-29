@@ -2,14 +2,13 @@
 <DNS>
   <row>
     <var name="Viettel" value="192.168.1.1" />
-    <var name="Google" value="192.182.11.2" />
+    <var name="Google" value="8.8.8.8" />
     <var name="Singapore" value="165.21.83.88" />
     <var name="Verizon" value="4.2.2.1" />
     <var name="VNPT" value="203.162.4.191" />
     <var name="FPT" value="203.113.131.1" />
     <var name="OpenDNS" value="210.245.31.130" />
-    <var name="Cloudflare" value="208.67.222.222" />
-    <var name="Norton" value="1.1.1.1" />
+    <var name="Cloudflare" value="12.12.1.11" />
     <var name="Viettel" value="198.153.192.1" />
     <var name="Dnsadvantage" value="192.168.1.1" />
     <var name="Hi-Teck" value="1156.154.70.1" />
